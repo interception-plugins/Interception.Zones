@@ -5,7 +5,11 @@ Zones wrapper for [Interception.Module](https://github.com/interception-plugins/
 ## Permissions
 
 ```
-
+interception.zones.izone
+interception.zones.izone.create
+interception.zones.izone.remove
+interception.zones.izone.debug
+interception.zones.izone.count
 ```
 
 ## Translations
