@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using interception.serialization.types.zones;
 
 namespace interception.plugins.zones.extensions {
-    public static class cfg_ex {
+    internal static class cfg_ex {
         public static bool is_zone_exist(this List<s_zone> l, string name) {
             var len = l.Count;
             for (int i = 0; i < len; i++) {
