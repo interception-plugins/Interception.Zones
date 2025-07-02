@@ -1,6 +1,6 @@
 # Interception.Zones
 
-Zones wrapper for [Interception.Module](https://github.com/interception-plugins/Interception.Module) implemented as Unturned RocketMod plugin/library
+Unturned RocketMod zones plugin based on [Interception.Module](https://github.com/interception-plugins/Interception.Module)
 
 ## Permissions
 
