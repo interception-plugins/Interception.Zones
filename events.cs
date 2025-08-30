@@ -26,7 +26,7 @@ namespace interception.plugins.zones {
                 }
                 if (main.cfg.zones[i].type == e_zone_type.box) {
                     var zone = (s_box_zone)main.cfg.zones[i];
-                    zone_manager.create_box_zone(zone.name, zone.position, zone.forward, zone.size);
+                    zone_manager.create_box_zone(zone.name, zone.position, zone.size);
                     continue;
                 }
                 if (main.cfg.zones[i].type == e_zone_type.mesh) {

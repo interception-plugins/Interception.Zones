@@ -93,7 +93,7 @@ namespace interception.plugins.zones.commands {
                         p.Player.say_to(Syntax_Create_Box, Color.red);
                         return;
                     }
-                    zone_manager.create_box_zone(args[1].ToLower(), p.Position, p.Player.transform.forward, new Vector3(x, y, z));
+                    zone_manager.create_box_zone(args[1].ToLower(), p.Position, new Vector3(x, y, z));
                     main.cfg.zones.Add(new s_box_zone(e_zone_type.box, args[1], p.Position, p.Player.transform.forward, new s_vector3(x, y, z)));
                     main.instance.Configuration.Save();
                     p.Player.say_to(main.instance.Translate("zone_created", e_zone_type.box, args[1]), Color.green);
