@@ -10,7 +10,7 @@ using Rocket.Unturned.Player;
 using interception.enums;
 using interception.zones;
 using interception.extensions;
-using interception.serialization.types;
+using interception.serialization.types.unity;
 using interception.serialization.types.zones;
 
 using interception.plugins.zones.extensions;
@@ -85,18 +85,33 @@ namespace interception.plugins.zones.commands {
                 }
                 else if (args[2].ToLower() == "box") {
                     if (args.Length < 6) {
-                        p.Player.say_to(Syntax_Create_Box, Color.red);
+                        p.Player.say_to(Syntax_Create_Any_Box, Color.red);
                         return;
                     }
                     float x,y,z;
                     if (!float.TryParse(args[3], out x) || !float.TryParse(args[4], out y) || !float.TryParse(args[5], out z)) {
-                        p.Player.say_to(Syntax_Create_Box, Color.red);
+                        p.Player.say_to(Syntax_Create_Any_Box, Color.red);
                         return;
                     }
                     zone_manager.create_box_zone(args[1].ToLower(), p.Position, new Vector3(x, y, z));
-                    main.cfg.zones.Add(new s_box_zone(e_zone_type.box, args[1], p.Position, p.Player.transform.forward, new s_vector3(x, y, z)));
+                    main.cfg.zones.Add(new s_box_zone(e_zone_type.box, args[1], p.Position, new s_vector3(x, y, z)));
                     main.instance.Configuration.Save();
                     p.Player.say_to(main.instance.Translate("zone_created", e_zone_type.box, args[1]), Color.green);
+                }
+                else if (args[2].ToLower() == "rotatable_box") {
+                    if (args.Length < 6) {
+                        p.Player.say_to(Syntax_Create_Any_Box, Color.red);
+                        return;
+                    }
+                    float x,y,z;
+                    if (!float.TryParse(args[3], out x) || !float.TryParse(args[4], out y) || !float.TryParse(args[5], out z)) {
+                        p.Player.say_to(Syntax_Create_Any_Box, Color.red);
+                        return;
+                    }
+                    zone_manager.create_rotatable_box_zone(args[1].ToLower(), p.Position, p.Player.transform.rotation, new Vector3(x, y, z));
+                    main.cfg.zones.Add(new s_rotatable_box_zone(e_zone_type.rotatable_box, args[1], p.Position, p.Player.transform.rotation, new s_vector3(x, y, z)));
+                    main.instance.Configuration.Save();
+                    p.Player.say_to(main.instance.Translate("zone_created", e_zone_type.rotatable_box, args[1]), Color.green);
                 }
                 else if (args[2].ToLower() == "mesh") {
                     if (args.Length < 4) {
@@ -156,7 +171,7 @@ namespace interception.plugins.zones.commands {
         public string Syntax => "/izone [create/remove/debug/count] [args*]";
         public string Syntax_Create => "/izone create [name] [type] [args]";
         public string Syntax_Create_Sphere_Distance => "/izone create [name] [sphere/distance_fast/distance_slow] [radius]";
-        public string Syntax_Create_Box => "/izone create [name] [box] [x] [y] [z]";
+        public string Syntax_Create_Any_Box => "/izone create [name] [rotatable_box/box] [x] [y] [z]";
         public string Syntax_Create_Mesh => "/izone create [name] [mesh] [raycast_height]";
         public string Syntax_Remove => "/izone remove [name]";
         public string Help => "null";

@@ -25,12 +25,12 @@ namespace interception.plugins.zones {
         protected override void Load() {
             instance = this;
             cfg = instance.Configuration.Instance;
-            Level.onPostLevelLoaded += events.on_post_level_loaded;
+            Level.onPrePreLevelLoaded += events.on_pre_pre_level_loaded;
             GC.Collect();
         }
 
         protected override void Unload() {
-            Level.onPostLevelLoaded -= events.on_post_level_loaded;
+            Level.onPrePreLevelLoaded -= events.on_pre_pre_level_loaded;
             cfg = null;
             instance = null;
             GC.Collect();

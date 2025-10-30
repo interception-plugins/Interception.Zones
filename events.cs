@@ -6,7 +6,7 @@ using interception.serialization.types.zones;
 
 namespace interception.plugins.zones {
     internal static class events {
-        public static void on_post_level_loaded(int level) {
+        public static void on_pre_pre_level_loaded(int level) {
             var len = main.cfg.zones.Count;
             for (int i = 0; i < len; i++) {
                 if (main.cfg.zones[i].type == e_zone_type.sphere) {
@@ -27,6 +27,11 @@ namespace interception.plugins.zones {
                 if (main.cfg.zones[i].type == e_zone_type.box) {
                     var zone = (s_box_zone)main.cfg.zones[i];
                     zone_manager.create_box_zone(zone.name, zone.position, zone.size);
+                    continue;
+                }
+                if (main.cfg.zones[i].type == e_zone_type.rotatable_box) {
+                    var zone = (s_rotatable_box_zone)main.cfg.zones[i];
+                    zone_manager.create_rotatable_box_zone(zone.name, zone.position, zone.rotation, zone.size);
                     continue;
                 }
                 if (main.cfg.zones[i].type == e_zone_type.mesh) {
